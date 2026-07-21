@@ -1,0 +1,682 @@
+/* Variables con la paleta de colores del usuario */
+:root {
+    --primary-color: #5D6532;     /* Verde Oliva Principal */
+    --accent-light: #D4E673;      /* Verde Claro */
+    --accent-medium: #AFBD5E;     /* Verde Salvia */
+    --dark-olive: #3D4221;        /* Oliva Oscuro para Textos */
+    --bg-cream: #F5F6F0;          /* Fondo base claro con matiz verde */
+    --white: #FFFFFF;
+    
+    --font-serif: 'Cormorant Garamond', serif;
+    --font-sans: 'Montserrat', sans-serif;
+    --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    --shadow-elegant: 0 15px 35px rgba(61, 66, 33, 0.06);
+}
+
+/* Reset y Estilos de Fondo */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-cream);
+    background-image: radial-gradient(rgba(93, 101, 50, 0.04) 1.5px, transparent 0),
+                      radial-gradient(rgba(93, 101, 50, 0.04) 1.5px, transparent 0);
+    background-size: 24px 24px;
+    background-position: 0 0, 12px 12px;
+    color: var(--dark-olive);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    text-align: center;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+}
+
+/* Capa de ambiente sutil */
+.botanical-bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 10% 20%, rgba(212, 230, 115, 0.02) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(175, 189, 94, 0.02) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Contenedor Centrado */
+.container {
+    width: 100%;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: clamp(40px, 8vw, 80px) 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Tipografías Fluidas */
+h1 {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: clamp(2.4rem, 8vw, 4.8rem);
+    letter-spacing: 2px;
+    line-height: 1.2;
+}
+
+h2 {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    letter-spacing: 3px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    line-height: 1.3;
+}
+
+h3 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(1.3rem, 4vw, 1.8rem);
+    letter-spacing: 2px;
+}
+
+.deceased {
+    font-size: 0.8rem;
+    color: var(--primary-color);
+    vertical-align: super;
+    margin-left: 2px;
+    opacity: 0.8;
+}
+
+/* Estructura de Tarjeta con Textura de Papel (Corregido para PC) */
+.textured-card {
+    background-color: var(--white);
+    padding: 3px; 
+    border: 1px solid rgba(93, 101, 50, 0.2);
+    box-shadow: var(--shadow-elegant);
+    border-radius: 6px;
+    margin: 20px auto; /* Centrado automático para PC */
+    width: 100%;
+    max-width: 100%;
+}
+
+.card-inner-border {
+    border: 1px solid rgba(175, 189, 94, 0.25);
+    padding: clamp(30px, 6vw, 50px) clamp(15px, 4vw, 30px);
+    border-radius: 4px;
+}
+
+/* Iconos SVG Adaptables */
+.custom-svg-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    max-width: 100%;
+}
+
+.custom-svg-icon svg {
+    width: clamp(40px, 10vw, 65px);
+    height: clamp(40px, 10vw, 65px);
+}
+
+.custom-svg-icon.accent-icon {
+    width: clamp(65px, 15vw, 80px);
+    height: clamp(65px, 15vw, 80px);
+    background-color: #F0F2E8;
+    border-radius: 50%;
+    border: 1px solid rgba(175, 189, 94, 0.2);
+    padding: 10px;
+}
+
+.custom-svg-icon.clothing-icon {
+    color: var(--primary-color);
+    opacity: 0.85;
+}
+
+/* Animaciones */
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Botones */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 28px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    transition: var(--transition-smooth);
+    border: 1px solid var(--primary-color);
+    width: 100%;
+    max-width: 320px;
+    margin-top: 15px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(93, 101, 50, 0.2);
+    background-color: var(--white);
+    color: var(--primary-color);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--dark-olive);
+    border-color: rgba(93, 101, 50, 0.3);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+}
+
+.btn-whatsapp {
+    background-color: #5D6532;
+    border-color: #5D6532;
+}
+
+.btn-whatsapp:hover {
+    background-color: var(--white);
+    color: var(--primary-color);
+}
+
+/* Portada (Hero Section) */
+.hero {
+    height: 100vh;
+    min-height: 560px;
+    background: linear-gradient(rgba(61, 66, 33, 0.45), rgba(61, 66, 33, 0.55)), 
+                url('../content/img/pareja.jpg') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    position: relative;
+    padding: 20px;
+}
+
+.botanical-branch {
+    color: var(--accent-light);
+    margin-bottom: 5px;
+    opacity: 0.9;
+}
+
+.botanical-branch svg {
+    width: 60px;
+    height: 30px;
+}
+
+.hero-content {
+    width: 100%;
+    max-width: 650px;
+}
+
+.hero-separator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin: 15px 0;
+}
+
+.hero-separator .dot {
+    width: 4px;
+    height: 4px;
+    background-color: var(--accent-light);
+    border-radius: 50%;
+}
+
+.hero-separator .dot.large {
+    width: 7px;
+    height: 7px;
+    background-color: var(--accent-medium);
+}
+
+.hero-content .quote {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.1rem, 4vw, 1.5rem);
+    display: block;
+    margin: 0 auto 10px auto;
+    color: #F0F2E8;
+    line-height: 1.4;
+}
+
+.hero-content .date {
+    font-size: clamp(0.9rem, 3.5vw, 1.25rem);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.scroll-down {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite;
+    font-size: 1.2rem;
+    color: var(--accent-light);
+}
+
+/* Contador de Tiempo */
+.countdown-section {
+    padding: clamp(40px, 8vw, 80px) 15px;
+    background-color: var(--white);
+    border-bottom: 1px solid rgba(93, 101, 50, 0.08);
+}
+
+.countdown-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(8px, 2.5vw, 20px);
+    max-width: 500px;
+    margin: 20px auto 0 auto;
+}
+
+.time-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--bg-cream);
+    padding: 12px 5px;
+    border-radius: 4px;
+    border: 1px solid rgba(175, 189, 94, 0.15);
+}
+
+.time-block span:first-child {
+    font-family: var(--font-serif);
+    font-size: clamp(1.6rem, 5vw, 3rem);
+    color: var(--primary-color);
+    line-height: 1.1;
+    font-weight: 300;
+}
+
+.time-block .label {
+    font-size: clamp(0.6rem, 1.8vw, 0.75rem);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 5px;
+    color: var(--primary-color);
+    font-weight: 600;
+    opacity: 0.8;
+}
+
+/* Padres de los Novios */
+.family-section {
+    padding: 20px 10px;
+}
+
+.family-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-top: 25px;
+}
+
+.family-column {
+    padding: 0 10px;
+}
+
+.family-column h3 {
+    font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: var(--primary-color);
+    border-bottom: 1px solid rgba(175, 189, 94, 0.2);
+    padding-bottom: 6px;
+    display: inline-block;
+}
+
+.parent-name {
+    font-size: clamp(1.05rem, 3vw, 1.25rem);
+    margin-bottom: 6px;
+    font-weight: 400;
+}
+
+/* Padrinos */
+.godparents-section {
+    padding: 20px 10px;
+}
+
+.godparent-card {
+    background-color: var(--white);
+    padding: 30px 20px;
+    border-radius: 6px;
+    border: 1px solid rgba(175, 189, 94, 0.2);
+    box-shadow: var(--shadow-elegant);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.godparent-card h3 {
+    font-size: clamp(1.2rem, 3.5vw, 1.4rem);
+    margin: 10px 0;
+    text-transform: uppercase;
+    color: var(--primary-color);
+}
+
+.placeholder-name {
+    font-size: 1rem;
+    font-style: italic;
+    color: #777;
+}
+
+/* Grid General Doble (Ubicaciones) */
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+    width: 100%;
+}
+
+.card {
+    background: var(--white);
+    padding: clamp(30px, 6vw, 50px) 20px;
+    border-radius: 6px;
+    box-shadow: var(--shadow-elegant);
+    border: 1px solid rgba(175, 189, 94, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.card h3 {
+    font-size: clamp(1.6rem, 5vw, 2rem);
+    margin: 15px 0 8px 0;
+    text-transform: uppercase;
+}
+
+.card .place {
+    font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: var(--dark-olive);
+}
+
+.time-badge {
+    margin: 5px 0 15px 0;
+    padding: 6px 18px;
+    background-color: var(--bg-cream);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--primary-color);
+}
+
+.card-hover-effect {
+    transition: var(--transition-smooth);
+}
+
+/* Código de Vestimenta */
+.dress-code-section {
+    padding: 20px 10px;
+}
+
+.code-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 6vw, 2.5rem);
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.dress-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    margin-top: 25px;
+}
+
+.dress-item {
+    width: 100%;
+    padding: 0 10px;
+}
+
+.dress-item strong {
+    display: block;
+    font-size: 1.1rem;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--dark-olive);
+}
+
+.dress-item span {
+    font-size: 0.95rem;
+    font-weight: 300;
+}
+
+.dress-details .divider {
+    width: 60px;
+    height: 1px;
+    background-color: rgba(175, 189, 94, 0.35);
+}
+
+/* Galería Adaptable */
+.gallery-section {
+    padding: 20px 10px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.gallery-item {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background-color: #E2E4DC;
+    border-radius: 6px;
+    box-shadow: var(--shadow-elegant);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(61, 66, 33, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 1.2rem;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+/* RSVP Card */
+.rsvp-section {
+    padding: 40px 10px;
+}
+
+.rsvp-card {
+    background-color: var(--white);
+    border: 1px solid rgba(175, 189, 94, 0.2);
+    box-shadow: var(--shadow-elegant);
+    padding: clamp(40px, 8vw, 70px) 20px;
+    border-radius: 6px;
+    width: 100%;
+}
+
+.passes-count {
+    font-family: var(--font-serif);
+    font-size: clamp(1.6rem, 5vw, 2rem);
+    margin: 10px 0;
+}
+
+.deadline {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+/* Footer */
+footer {
+    background-color: var(--dark-olive);
+    color: var(--bg-cream);
+    padding: 50px 20px;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+}
+
+footer a {
+    color: var(--accent-light);
+    text-decoration: none;
+    opacity: 0.8;
+}
+
+/* Estilos para el Formulario de Confirmación */
+.rsvp-form {
+    max-width: 450px;
+    margin: 30px auto 0 auto;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    color: var(--dark-olive);
+}
+
+.rsvp-form input[type="text"],
+.rsvp-form select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid rgba(175, 189, 94, 0.4);
+    border-radius: 4px;
+    background-color: var(--bg-cream);
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: var(--dark-olive);
+    transition: var(--transition-smooth);
+    outline: none;
+}
+
+.rsvp-form input[type="text"]:focus,
+.rsvp-form select:focus {
+    border-color: var(--primary-color);
+    background-color: var(--white);
+    box-shadow: 0 0 8px rgba(93, 101, 50, 0.1);
+}
+
+.rsvp-form .deadline {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.rsvp-form .btn-whatsapp {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 0;
+    cursor: pointer;
+}
+
+/* Animaciones */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+    40% { transform: translateY(-6px) translateX(-50%); }
+    60% { transform: translateY(-3px) translateX(-50%); }
+}
+
+/* ==========================================================================
+   Media Queries para Pantallas Medianas y Grandes (Tablet y Desktop)
+   ========================================================================== */
+@media (min-width: 768px) {
+    /* Grids en dos columnas perfectamente centradas */
+    .grid-2, .family-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+        justify-items: center;
+        align-items: start;
+    }
+    
+    /* Galería en 4 columnas */
+    .gallery-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+    
+    /* Distribución Horizontal del Código de Vestimenta */
+    .dress-details {
+        flex-direction: row;
+        gap: 50px;
+        justify-content: center;
+    }
+    
+    .dress-details .divider {
+        width: 1px;
+        height: 100px;
+    }
+    
+    .card-hover-effect:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 45px rgba(93, 101, 50, 0.12);
+        border-color: var(--accent-medium);
+    }
+    
+    .gallery-item:hover img {
+        transform: scale(1.08);
+    }
+    
+    .gallery-item:hover .gallery-overlay {
+        opacity: 1;
+    }
+    
+}
