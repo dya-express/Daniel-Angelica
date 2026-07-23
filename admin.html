@@ -9,7 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%235D6532'/><path d='M50,25 C38,45 38,62 50,78 C62,62 62,45 50,25 Z' fill='%23D4E673'/><path d='M50,25 L50,78' stroke='%233D4221' stroke-width='2'/></svg>">
+
     <!-- Iconos FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -185,6 +186,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 10px;
             margin-top: 10px;
+            margin-bottom: 15px;
         }
 
         .btn-sm {
@@ -277,6 +279,7 @@
         .guest-table td {
             padding: 14px 16px;
             border-bottom: 1px solid rgba(93, 101, 50, 0.08);
+            vertical-align: middle;
         }
 
         .guest-table th {
@@ -288,8 +291,20 @@
             letter-spacing: 1px;
         }
 
+        .guest-table tbody tr {
+            transition: background-color 0.2s ease;
+        }
+
+        .guest-table tbody tr.confirmed-row {
+            background-color: rgba(93, 101, 50, 0.05);
+        }
+
         .guest-table tbody tr:hover {
             background-color: rgba(245, 246, 240, 0.5);
+        }
+
+        .guest-table tbody tr.confirmed-row:hover {
+            background-color: rgba(93, 101, 50, 0.08);
         }
 
         .side-badge {
@@ -310,6 +325,13 @@
         .side-badge.novio {
             background-color: #E8F0F8;
             color: #4070A0;
+        }
+
+        .checkbox-confirm {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-color);
+            cursor: pointer;
         }
 
         .actions-cell {
@@ -354,14 +376,43 @@
         .summary-bar {
             margin-top: 15px;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            gap: 8px;
             font-size: 0.8rem;
             font-weight: 600;
-            color: #666;
+            color: #555;
             background-color: var(--white);
-            padding: 12px 16px;
+            padding: 14px 16px;
             border-radius: 6px;
             border: 1px solid rgba(93, 101, 50, 0.1);
+        }
+
+        @media (min-width: 600px) {
+            .summary-bar {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
+        .textarea-import {
+            width: 100%;
+            height: 80px;
+            padding: 10px;
+            border: 1px solid rgba(93, 101, 50, 0.25);
+            border-radius: 4px;
+            background-color: var(--bg-cream);
+            font-family: monospace;
+            font-size: 0.75rem;
+            color: var(--dark-olive);
+            resize: none;
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+
+        .textarea-import:focus {
+            border-color: var(--primary-color);
+            background-color: var(--white);
         }
     </style>
 </head>
@@ -411,14 +462,25 @@
                     <h2 class="panel-title" style="font-size: 1.1rem; margin-bottom: 10px; border:none; padding:0;">
                         <i class="fa-solid fa-database"></i> Copia de Seguridad
                     </h2>
-                    <p style="font-size: 0.72rem; color: #666; line-height: 1.4;">
-                        Los datos se guardan de manera segura en la memoria de este navegador. Exporta un respaldo en formato de texto para transferirlo a otros dispositivos.
+                    <p style="font-size: 0.72rem; color: #666; line-height: 1.4; margin-bottom: 10px;">
+                        Los datos se guardan de manera segura en la memoria de este navegador.
                     </p>
+                    
+                    <!-- Importar por archivo -->
                     <div class="backup-buttons">
                         <button id="btn-export" class="btn-admin btn-sm btn-outline"><i class="fa-solid fa-download"></i> Exportar</button>
-                        <button id="btn-import-trigger" class="btn-admin btn-sm btn-outline"><i class="fa-solid fa-upload"></i> Importar</button>
+                        <button id="btn-import-trigger" class="btn-admin btn-sm btn-outline"><i class="fa-solid fa-file-import"></i> Subir Archivo</button>
                     </div>
                     <input type="file" id="import-file" accept=".txt,.json" style="display: none;">
+
+                    <!-- Importar pegando texto JSON -->
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label for="import-text" style="font-size: 0.7rem;">O Pega el Texto de Respaldo:</label>
+                        <textarea id="import-text" class="textarea-import" placeholder='[{"name": "Ejemplo", "passes": "3", "side": "novia", "confirmed": false}]'></textarea>
+                        <button id="btn-import-text" class="btn-admin btn-sm" style="margin-top: 8px; width: 100%;">
+                            <i class="fa-solid fa-paste"></i> Importar Texto Pegado
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -441,8 +503,9 @@
                         <thead>
                             <tr>
                                 <th>Nombre Completo</th>
-                                <th style="width: 80px; text-align: center;">Pases</th>
-                                <th style="width: 100px; text-align: center;">Lista</th>
+                                <th style="width: 70px; text-align: center;">Pases</th>
+                                <th style="width: 90px; text-align: center;">Lista</th>
+                                <th style="width: 90px; text-align: center;">Confirmado</th>
                                 <th style="width: 90px; text-align: center;">Acción</th>
                             </tr>
                         </thead>
@@ -451,8 +514,8 @@
                 </div>
 
                 <div class="summary-bar">
-                    <span id="stat-count">Total: 0 Invitados</span>
-                    <span id="stat-passes">Pases Asignados: 0</span>
+                    <span id="stat-count">Total: 0 | Confirmados: 0</span>
+                    <span id="stat-passes">Pases Totales: 0 | Pases Confirmados: 0</span>
                 </div>
             </div>
         </div>
@@ -461,6 +524,15 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             let guestsList = JSON.parse(localStorage.getItem('wedding_guests_list')) || [];
+            
+            // Asegurar que todos los registros tengan la propiedad de confirmación
+            guestsList.forEach(guest => {
+                if (guest.confirmed === undefined) {
+                    guest.confirmed = false;
+                }
+            });
+            persistData();
+
             let activeFilter = 'todos';
             let searchQuery = '';
 
@@ -501,14 +573,19 @@
                     return matchesSearch && matchesTab;
                 });
 
+                // Cálculos de estadísticas dinámicas basadas en la pestaña activa
+                let totalGuests = filtered.length;
+                let confirmedGuests = filtered.filter(g => g.confirmed).length;
                 let totalPasses = filtered.reduce((acc, curr) => acc + parseInt(curr.passes), 0);
-                statCount.innerText = `Total: ${filtered.length} Invitados`;
-                statPasses.innerText = `Pases Asignados: ${totalPasses}`;
+                let confirmedPasses = filtered.filter(g => g.confirmed).reduce((acc, curr) => acc + parseInt(curr.passes), 0);
+
+                statCount.innerText = `Total: ${totalGuests} | Confirmados: ${confirmedGuests}`;
+                statPasses.innerText = `Pases Totales: ${totalPasses} | Pases Confirmados: ${confirmedPasses}`;
 
                 if (filtered.length === 0) {
                     tableBody.innerHTML = `
                         <tr>
-                            <td colspan="4" style="text-align: center; color: #888; padding: 30px;">
+                            <td colspan="5" style="text-align: center; color: #888; padding: 30px;">
                                 No se encontraron registros de invitados.
                             </td>
                         </tr>
@@ -518,6 +595,10 @@
 
                 filtered.forEach(guest => {
                     const tr = document.createElement('tr');
+                    if (guest.confirmed) {
+                        tr.classList.add('confirmed-row');
+                    }
+
                     const token = encodeToken({ n: guest.name, p: parseInt(guest.passes), s: guest.side });
                     const uniqueLink = `${getBaseUrl()}?g=${token}`;
 
@@ -528,6 +609,9 @@
                             <span class="side-badge ${guest.side}">
                                 ${guest.side === 'novia' ? 'Novia' : 'Novio'}
                             </span>
+                        </td>
+                        <td style="text-align: center;">
+                            <input type="checkbox" class="checkbox-confirm" ${guest.confirmed ? 'checked' : ''} onchange="toggleConfirmation('${guest.id}', this.checked)">
                         </td>
                         <td style="text-align: center;">
                             <div class="actions-cell">
@@ -548,6 +632,16 @@
                 localStorage.setItem('wedding_guests_list', JSON.stringify(guestsList));
             }
 
+            // Cambiar estado de confirmación
+            window.toggleConfirmation = function(id, isChecked) {
+                const index = guestsList.findIndex(g => g.id === id);
+                if (index !== -1) {
+                    guestsList[index].confirmed = isChecked;
+                    persistData();
+                    renderTable();
+                }
+            };
+
             addForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const nameValue = guestNameInput.value.trim();
@@ -560,7 +654,8 @@
                     id: Date.now().toString() + Math.random().toString(36).substring(2, 5),
                     name: nameValue,
                     passes: passesValue,
-                    side: sideValue
+                    side: sideValue,
+                    confirmed: false
                 };
 
                 guestsList.push(newGuestObj);
@@ -636,6 +731,7 @@
                 });
             });
 
+            // Función de exportación de datos
             document.getElementById('btn-export').addEventListener('click', () => {
                 if (guestsList.length === 0) {
                     alert("No existen datos para respaldar actualmente.");
@@ -655,6 +751,7 @@
                 URL.revokeObjectURL(url);
             });
 
+            // Función de importación por archivo
             const fileInput = document.getElementById('import-file');
             document.getElementById('btn-import-trigger').addEventListener('click', () => {
                 fileInput.click();
@@ -666,25 +763,54 @@
 
                 const reader = new FileReader();
                 reader.onload = function(evt) {
-                    try {
-                        const parsed = JSON.parse(evt.target.result);
-                        if (Array.isArray(parsed)) {
-                            if (confirm(`Se han detectado ${parsed.length} invitados en el archivo. ¿Deseas importarlos?`)) {
-                                guestsList = parsed;
-                                persistData();
-                                renderTable();
-                                alert("Base de datos de invitados restablecida con éxito.");
-                            }
-                        } else {
-                            alert("El formato del archivo no es compatible.");
-                        }
-                    } catch (err) {
-                        alert("Ocurrió un error al procesar el archivo.");
-                    }
+                    processImportData(evt.target.result);
                 };
                 reader.readAsText(file);
                 fileInput.value = '';
             });
+
+            // Función de importación por Texto pegado
+            const btnImportText = document.getElementById('btn-import-text');
+            const textareaImport = document.getElementById('import-text');
+
+            btnImportText.addEventListener('click', () => {
+                const rawText = textareaImport.value.trim();
+                if (!rawText) {
+                    alert("Por favor, pega el texto de respaldo primero.");
+                    return;
+                }
+                processImportData(rawText);
+                textareaImport.value = '';
+            });
+
+            // Procesador genérico de importación para asegurar propiedades por defecto
+            function processImportData(textString) {
+                try {
+                    const parsed = JSON.parse(textString);
+                    if (Array.isArray(parsed)) {
+                        if (confirm(`Se han detectado ${parsed.length} invitados en el lote. ¿Deseas importarlos e inicialmente reemplazar la lista actual?`)) {
+                            // Validar y normalizar la estructura de cada invitado importado
+                            parsed.forEach(guest => {
+                                if (guest.confirmed === undefined) {
+                                    guest.confirmed = false;
+                                }
+                                if (!guest.id) {
+                                    guest.id = Date.now().toString() + Math.random().toString(36).substring(2, 5);
+                                }
+                            });
+                            
+                            guestsList = parsed;
+                            persistData();
+                            renderTable();
+                            alert("Base de datos de invitados restablecida con éxito.");
+                        }
+                    } else {
+                        alert("El formato de los datos no es compatible. Debe ser un arreglo de objetos JSON.");
+                    }
+                } catch (err) {
+                    alert("Ocurrió un error al procesar la cadena de datos. Asegúrate de copiar el JSON de manera completa y correcta.");
+                }
+            }
 
             renderTable();
         });

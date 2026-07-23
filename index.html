@@ -2,14 +2,19 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Daniel & Angelica | Invitación de Boda</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%235D6532'/><path d='M50,25 C38,45 38,62 50,78 C62,62 62,45 50,25 Z' fill='%23D4E673'/><path d='M50,25 L50,78' stroke='%233D4221' stroke-width='2'/></svg>">
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
     
+    <!-- Iconos FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Hoja de Estilo -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -18,31 +23,21 @@
     <div class="texture-overlay-paper"></div>
     <div class="botanical-bg-overlay" id="falling-leaves-container"></div>
 
-    <!-- Stickers de Fondo Interactivos (SVG vectoriales grandes) -->
+    <!-- Stickers de Fondo Interactivos -->
     <div class="bg-sticker sticker-top-left parallax-sticker">
         <svg viewBox="0 0 200 400" width="100%" height="100%">
-            <path d="M0,50 Q40,40 60,100 T120,150 T180,300" fill="none" stroke="#5D6532" stroke-width="1" opacity="0.3"/>
-            <path d="M60,100 C80,90 90,70 100,50 C90,70 80,85 60,100 Z" fill="#5D6532" opacity="0.15"/>
-            <path d="M120,150 C140,140 150,120 160,100 C150,120 140,135 120,150 Z" fill="#5D6532" opacity="0.12"/>
-            <path d="M30,120 Q5,150 10,180 C20,160 30,140 30,120 Z" fill="#5D6532" opacity="0.15"/>
+            <path d="M0,50 Q40,40 60,100 T120,150 T180,300" fill="none" stroke="#5D6532" stroke-width="1.2" opacity="0.1"/>
+            <path d="M60,100 C80,90 90,70 100,50 C90,70 80,85 60,100 Z" fill="#5D6532" opacity="0.05"/>
         </svg>
     </div>
     <div class="bg-sticker sticker-mid-right parallax-sticker">
         <svg viewBox="0 0 200 400" width="100%" height="100%">
-            <path d="M200,50 Q150,90 120,160 T40,320" fill="none" stroke="#5D6532" stroke-width="1.2" opacity="0.25"/>
-            <path d="M120,160 C100,170 80,190 70,210 C85,195 105,180 120,160 Z" fill="#5D6532" opacity="0.15"/>
-            <path d="M160,100 C130,110 110,130 100,150 C115,135 140,120 160,100 Z" fill="#5D6532" opacity="0.12"/>
-        </svg>
-    </div>
-    <div class="bg-sticker sticker-bottom-left parallax-sticker">
-        <svg viewBox="0 0 200 400" width="100%" height="100%">
-            <path d="M0,350 Q60,300 90,200 T190,50" fill="none" stroke="#5D6532" stroke-width="1" opacity="0.3"/>
-            <circle cx="90" cy="200" r="3" fill="#AFBD5E" opacity="0.3"/>
-            <circle cx="140" cy="120" r="4" fill="#AFBD5E" opacity="0.2"/>
+            <path d="M200,50 Q150,90 120,160 T40,320" fill="none" stroke="#5D6532" stroke-width="1.2" opacity="0.08"/>
+            <path d="M120,160 C100,170 80,190 70,210 C85,195 105,180 120,160 Z" fill="#5D6532" opacity="0.05"/>
         </svg>
     </div>
 
-    <!-- Reproductor de Audio Flotante (Conectado a YouTube Invisible Offscreen) -->
+    <!-- Reproductor de Audio Flotante -->
     <div class="audio-control-container">
         <button id="audio-toggle-btn" class="audio-btn" aria-label="Reproducir música de fondo">
             <i class="fa-solid fa-music"></i>
@@ -52,10 +47,10 @@
                 <span></span>
             </span>
         </button>
-        <!-- Elemento renderizado fuera de la pantalla para evitar bloqueos del navegador -->
-        <div id="yt-player" style="position: absolute; top: -9999px; left: -9999px; width: 200px; height: 200px; pointer-events: none;"></div>
+        <audio id="background-music" loop src="content/audios/song.mp3"></audio>
     </div>
 
+    <!-- Portada -->
     <header class="hero">
         <div class="hero-bg-zoom"></div>
         <div class="hero-content">
@@ -76,8 +71,15 @@
                 <i class="fa-solid fa-chevron-down"></i>
             </div>
         </div>
+        <!-- Máscara de Curva en la Base -->
+        <div class="hero-wave-divider">
+            <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+                <path d="M0,32L120,42.7C240,53,480,75,600,74.7C720,75,960,53,1080,42.7C1200,32,1320,32,1380,32L1440,32L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,720,120,600,120C480,120,240,120,120,120L0,120Z" fill="#F5F6F0"></path>
+            </svg>
+        </div>
     </header>
 
+    <!-- Cuenta Regresiva -->
     <section class="countdown-section reveal">
         <h2>Solo Faltan</h2>
         <div id="countdown" class="countdown-container">
@@ -100,40 +102,63 @@
         </div>
     </section>
 
+    <!-- Divisor Floral: Ramo Acuarela -->
+    <div class="floral-divider reveal">
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/024/628/734/small_2x/flower-bouquet-floral-clip-art-element-transparent-background-png.png" alt="Arreglo Floral">
+    </div>
+
+    <!-- Sección de Padres con Logos Explícitos de Novios -->
     <section class="family-section reveal">
         <div class="container">
-            <div class="textured-card paper-texture hover-glow">
+            <div class="textured-card paper-texture">
                 <div class="card-inner-border">
                     <div class="botanical-flourish flourish-top-left"></div>
                     <div class="botanical-flourish flourish-bottom-right"></div>
-                    <div class="botanical-icon pulse-soft">
-                        <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M12 2C11.5 5 9 8.5 6 10 C9 11 11 13.5 12 17.5 C13 13.5 15 11 18 10 C15 8.5 12.5 5 12 2Z" />
-                        </svg>
-                    </div>
-                    <h2>Con la bendición de Dios y nuestros padres</h2>
-                    <div class="family-grid stagger-container">
-                        <div class="family-column stagger-item">
+                    
+                    <h2 style="margin-bottom: 40px;">Con la bendición de Dios y nuestros padres</h2>
+                    
+                    <div class="family-grid">
+                        <!-- Lado de la Novia -->
+                        <div class="family-column">
+                            <div class="family-logo bride-logo">
+                                <div class="parent-img-wrapper">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/3074/3074076.png" alt="Icono Novia" class="wedding-catalogue-icon">
+                                </div>
+                            </div>
                             <h3>Padres de la Novia</h3>
                             <p class="parent-name">Juana Silvas Arrieta</p>
-                            <p class="parent-name">José Angel Espino Mireles</p>
+                            <p class="parent-name" style="margin-bottom: 0;">José Angel Espino Mireles</p>
                         </div>
-                        <div class="family-column stagger-item">
+                        
+                        <!-- Lado del Novio -->
+                        <div class="family-column">
+                            <div class="family-logo groom-logo">
+                                <div class="parent-img-wrapper">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/3074/3074081.png" alt="Icono Novio" class="wedding-catalogue-icon">
+                                </div>
+                            </div>
                             <h3>Padres del Novio</h3>
                             <p class="parent-name">Bertha Alicia Carbajal Camacho <span class="deceased">†</span></p>
-                            <p class="parent-name">José Luis Villa Torres</p>
+                            <p class="parent-name" style="margin-bottom: 0;">José Luis Villa Torres</p>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Divisor Floral: Rosa Acuarela -->
+    <div class="floral-divider reveal">
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/015/739/555/small_2x/pink-flower-arrangement-with-watercolor-style-png.png" alt="Rosa Acuarela">
+    </div>
+
+    <!-- Padrinos -->
     <section class="godparents-section reveal">
         <div class="container">
             <h2>Nuestros Padrinos</h2>
-            <div class="grid-2 stagger-container">
-                <div class="godparent-card card-hover-effect hover-glow stagger-item">
+            <div class="grid-2">
+                <div class="godparent-card card-hover-effect hover-glow">
                     <div class="custom-svg-icon icon-anim">
                         <svg viewBox="0 0 64 64" width="60" height="60" stroke="currentColor" stroke-width="1.5" fill="none">
                             <path d="M22 37 C12 37, 12 23, 22 23 C32 23, 32 37, 42 37 C52 37, 52 23, 42 23 C32 23, 32 37, 22 37 Z" />
@@ -144,7 +169,7 @@
                     <p class="placeholder-name">Por confirmar</p>
                 </div>
                 
-                <div class="godparent-card card-hover-effect hover-glow stagger-item">
+                <div class="godparent-card card-hover-effect hover-glow">
                     <div class="custom-svg-icon icon-anim">
                         <svg viewBox="0 0 64 64" width="60" height="60" stroke="currentColor" stroke-width="1.5" fill="none">
                             <circle cx="24" cy="32" r="14" />
@@ -159,100 +184,83 @@
         </div>
     </section>
 
+    <!-- Divisor Floral: Flores Silvestres -->
+    <div class="floral-divider reveal">
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/053/289/988/small_2x/colorful-wildflowers-in-a-serene-meadow-setting-png.png" alt="Flores Silvestres">
+    </div>
+
+    <!-- Ubicaciones -->
     <section class="details-section reveal">
         <div class="container">
-            <div class="grid-2 stagger-container">
-                <div class="card card-hover-effect hover-glow stagger-item">
-                    <div class="custom-svg-icon accent-icon icon-anim">
-                        <svg viewBox="0 0 64 64" width="70" height="70" stroke="currentColor" stroke-width="1.2" fill="none">
-                            <path d="M32 6 L32 16 M28 10 L36 10 M32 16 L12 36 L12 58 L52 58 L52 36 Z" />
-                            <path d="M26 38 L38 38 L38 58 L26 58 Z" />
-                            <path d="M32 24 A4 4 0 0 0 32 32 A4 4 0 0 0 32 24 Z" />
-                        </svg>
-                    </div>
-                    <h3>Ceremonia</h3>
-                    <p class="place">San Lorenzo</p>
-                    <div class="time-badge">
-                        <i class="fa-regular fa-clock"></i> 04:00 PM
-                    </div>
-                    <a href="https://maps.app.goo.gl/vYrztCrVBQ5fHUwFA" target="_blank" class="btn btn-outline">
-                        <i class="fa-solid fa-compass"></i> Ubicación del Templo
-                    </a>
-                </div>
-
-                <div class="card card-hover-effect hover-glow stagger-item">
-                    <div class="custom-svg-icon accent-icon icon-anim">
-                        <svg viewBox="0 0 64 64" width="70" height="70" stroke="currentColor" stroke-width="1.2" fill="none">
-                            <path d="M8 56 L56 56 M14 56 L14 12 L38 12 L38 56 M38 28 L50 28 L50 56" />
-                            <line x1="20" y1="20" x2="26" y2="20" />
-                            <line x1="20" y1="28" x2="26" y2="28" />
-                            <line x1="20" y1="36" x2="26" y2="36" />
-                            <line x1="32" y1="20" x2="32" y2="44" stroke-dasharray="3 3" />
-                        </svg>
-                    </div>
-                    <h3>Recepción</h3>
-                    <p class="place">Ocua Loft</p>
-                    <div class="time-badge">
-                        <i class="fa-regular fa-clock"></i> 08:00 PM a 02:00 AM
-                    </div>
-                    <a href="https://maps.app.goo.gl/rMgi3FaeqVtthUCw8" target="_blank" class="btn btn-outline">
-                        <i class="fa-solid fa-compass"></i> Ubicación del Loft
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Línea de Tiempo (Actividades Oficiales) -->
-    <section class="itinerary-section reveal">
-        <div class="container">
-            <h2>Itinerario del Día</h2>
-            <p class="itinerary-subtitle">Cada instante está diseñado para compartir memorias invaluables</p>
-            
-            <div class="itinerary-timeline stagger-container">
+            <div class="grid-2">
                 
-                <div class="itinerary-item stagger-item">
-                    <div class="itinerary-time">04:00 PM</div>
-                    <div class="itinerary-node"><i class="fa-solid fa-church"></i></div>
-                    <div class="itinerary-content card-hover-effect hover-glow">
-                        <h3>Ceremonia</h3>
-                        <p>Inicio de nuestra unión matrimonial en la hermosa iglesia de San Lorenzo.</p>
+                <!-- Tarjeta Ceremonia -->
+                <div class="flip-card card-hover-effect">
+                    <div class="flip-card-inner">
+                        
+                        <div class="flip-card-front">
+                            <div class="custom-svg-icon accent-icon icon-anim">
+                                <svg viewBox="0 0 64 64" width="70" height="70" stroke="currentColor" stroke-width="1.2" fill="none">
+                                    <path d="M32 6 L32 16 M28 10 L36 10 M32 16 L12 36 L12 58 L52 58 L52 36 Z" />
+                                    <path d="M26 38 L38 38 L38 58 L26 58 Z" />
+                                    <path d="M32 24 A4 4 0 0 0 32 32 A4 4 0 0 0 32 24 Z" />
+                                </svg>
+                            </div>
+                            <h3>Ceremonia</h3>
+                            <p class="place">San Lorenzo</p>
+                            <div class="time-badge">
+                                <i class="fa-regular fa-clock"></i> 04:00 PM
+                            </div>
+                            <p class="tap-hint"><i class="fa-solid fa-arrows-rotate"></i> Toca para ver dirección</p>
+                        </div>
+                        
+                        <div class="flip-card-back">
+                            <h3 style="color: var(--primary-color); margin-bottom: 5px;">Ubicación</h3>
+                            <p style="font-size: 0.88rem; margin-bottom: 15px; font-weight: 300; line-height: 1.4;">
+                                Te esperamos para celebrar el sacramento del matrimonio en la Parroquia de San Lorenzo.
+                            </p>
+                            <a href="https://maps.app.goo.gl/vYrztCrVBQ5fHUwFA" target="_blank" rel="noopener" class="btn btn-outline" style="width:90%;">
+                                <i class="fa-solid fa-compass"></i> Abrir Mapa
+                            </a>
+                            <p class="tap-hint" style="margin-top: 15px;"><i class="fa-solid fa-arrows-rotate"></i> Volver al frente</p>
+                        </div>
+
                     </div>
                 </div>
 
-                <div class="itinerary-item stagger-item">
-                    <div class="itinerary-time">08:00 PM</div>
-                    <div class="itinerary-node"><i class="fa-solid fa-utensils"></i></div>
-                    <div class="itinerary-content card-hover-effect hover-glow">
-                        <h3>Comida</h3>
-                        <p>Cena formal y recepción de bienvenida en el salón Ocua Loft.</p>
-                    </div>
-                </div>
+                <!-- Tarjeta Recepción -->
+                <div class="flip-card card-hover-effect">
+                    <div class="flip-card-inner">
+                        
+                        <div class="flip-card-front">
+                            <div class="custom-svg-icon accent-icon icon-anim">
+                                <svg viewBox="0 0 64 64" width="70" height="70" stroke="currentColor" stroke-width="1.2" fill="none">
+                                    <path d="M8 56 L56 56 M14 56 L14 12 L38 12 L38 56 M38 28 L50 28 L50 56" />
+                                    <line x1="20" y1="20" x2="26" y2="20" />
+                                    <line x1="20" y1="28" x2="26" y2="28" />
+                                    <line x1="20" y1="36" x2="26" y2="36" />
+                                    <line x1="32" y1="20" x2="32" y2="44" stroke-dasharray="3 3" />
+                                </svg>
+                            </div>
+                            <h3>Recepción</h3>
+                            <p class="place">Ocua Loft</p>
+                            <div class="time-badge">
+                                <i class="fa-regular fa-clock"></i> 08:00 PM a 02:00 AM
+                            </div>
+                            <p class="tap-hint"><i class="fa-solid fa-arrows-rotate"></i> Toca para ver dirección</p>
+                        </div>
+                        
+                        <div class="flip-card-back">
+                            <h3 style="color: var(--primary-color); margin-bottom: 5px;">Ubicación</h3>
+                            <p style="font-size: 0.88rem; margin-bottom: 15px; font-weight: 300; line-height: 1.4;">
+                                Posteriormente, acompáñanos a brindar, cenar y celebrar este gran día especial en Ocua Loft.
+                            </p>
+                            <a href="https://maps.app.goo.gl/rMgi3FaeqVtthUCw8" target="_blank" rel="noopener" class="btn btn-outline" style="width:90%;">
+                                <i class="fa-solid fa-compass"></i> Abrir Mapa
+                            </a>
+                            <p class="tap-hint" style="margin-top: 15px;"><i class="fa-solid fa-arrows-rotate"></i> Volver al frente</p>
+                        </div>
 
-                <div class="itinerary-item stagger-item">
-                    <div class="itinerary-time">09:00 PM</div>
-                    <div class="itinerary-node"><i class="fa-solid fa-compact-disc"></i></div>
-                    <div class="itinerary-content card-hover-effect hover-glow">
-                        <h3>DJ</h3>
-                        <p>Apertura de la pista de baile y mezcla musical para celebrar a lo grande.</p>
-                    </div>
-                </div>
-
-                <div class="itinerary-item stagger-item">
-                    <div class="itinerary-time">10:30 PM</div>
-                    <div class="itinerary-node"><i class="fa-solid fa-music"></i></div>
-                    <div class="itinerary-content card-hover-effect hover-glow">
-                        <h3>Vals</h3>
-                        <p>El tradicional baile de los novios y el momento familiar de la noche.</p>
-                    </div>
-                </div>
-
-                <div class="itinerary-item stagger-item">
-                    <div class="itinerary-time">02:00 AM</div>
-                    <div class="itinerary-node"><i class="fa-solid fa-moon"></i></div>
-                    <div class="itinerary-content card-hover-effect hover-glow">
-                        <h3>Fin del Evento</h3>
-                        <p>Agradecemos profundamente habernos acompañado hasta el cierre de este día mágico.</p>
                     </div>
                 </div>
 
@@ -260,6 +268,72 @@
         </div>
     </section>
 
+    <!-- Itinerario (Animación de Cascada por elemento individual) -->
+    <section class="itinerary-section">
+        <div class="container">
+            <h2 style="margin-bottom: 30px;">Itinerario</h2>
+            <div class="itinerary-block-card">
+                
+                <div class="itinerary-block-item reveal">
+                    <div class="itinerary-block-icon">
+                        <i class="fa-solid fa-church"></i>
+                    </div>
+                    <div class="itinerary-block-info">
+                        <h3>Ceremonia</h3>
+                        <p>04:00 PM</p>
+                    </div>
+                </div>
+
+                <div class="itinerary-block-item reveal">
+                    <div class="itinerary-block-icon">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <div class="itinerary-block-info">
+                        <h3>Comida</h3>
+                        <p>08:00 PM</p>
+                    </div>
+                </div>
+
+                <div class="itinerary-block-item reveal">
+                    <div class="itinerary-block-icon">
+                        <i class="fa-solid fa-compact-disc"></i>
+                    </div>
+                    <div class="itinerary-block-info">
+                        <h3>DJ</h3>
+                        <p>09:00 PM</p>
+                    </div>
+                </div>
+
+                <div class="itinerary-block-item reveal">
+                    <div class="itinerary-block-icon">
+                        <i class="fa-solid fa-music"></i>
+                    </div>
+                    <div class="itinerary-block-info">
+                        <h3>Vals</h3>
+                        <p>10:30 PM</p>
+                    </div>
+                </div>
+
+                <div class="itinerary-block-item reveal">
+                    <div class="itinerary-block-icon">
+                        <i class="fa-solid fa-moon"></i>
+                    </div>
+                    <div class="itinerary-block-info">
+                        <h3>Fin del Evento</h3>
+                        <p>02:00 AM</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Divisor Floral -->
+    <div class="floral-divider reveal">
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/023/391/092/small_2x/beautiful-flower-with-leaf-watercolor-ai-generate-png.png" alt="Flores Silvestres">
+    </div>
+
+    <!-- Código de Vestimenta -->
     <section class="dress-code-section reveal">
         <div class="container">
             <div class="textured-card paper-texture hover-glow">
@@ -267,7 +341,7 @@
                     <div class="botanical-flourish flourish-top-right"></div>
                     <div class="botanical-flourish flourish-bottom-left"></div>
                     <h2>Código de Vestimenta</h2>
-                    <p class="code-title">Formal</p>
+                    <p class="code-title">Riguroso Formal</p>
                     <div class="dress-details">
                         <div class="dress-item">
                             <div class="custom-svg-icon clothing-icon icon-anim">
@@ -280,7 +354,7 @@
                                 </svg>
                             </div>
                             <strong>Caballeros</strong>
-                            <span>Traje Formal</span>
+                            <span>Traje Formal u Obscuro</span>
                         </div>
                         <div class="divider"></div>
                         <div class="dress-item">
@@ -291,7 +365,7 @@
                                 </svg>
                             </div>
                             <strong>Damas</strong>
-                            <span>Vestido de Cóctel o Largo</span>
+                            <span>Vestido Largo</span>
                         </div>
                     </div>
                 </div>
@@ -299,37 +373,64 @@
         </div>
     </section>
 
-    <section class="gallery-section reveal">
+    <!-- Sección Nota Especial: Exclusión de niños (No niños) -->
+    <section class="kids-policy-section reveal">
         <div class="container">
-            <h2>Nuestra Galería</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item interactive-gallery" data-image="content/img/foto1.jpg">
-                    <img src="content/img/foto1.jpg" alt="Daniel & Angelica" onerror="this.style.display='none'; this.parentNode.classList.add('img-placeholder')">
-                    <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
-                </div>
-                <div class="gallery-item interactive-gallery" data-image="content/img/foto2.jpg">
-                    <img src="content/img/foto2.jpg" alt="Sesión de novios" onerror="this.style.display='none'; this.parentNode.classList.add('img-placeholder')">
-                    <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
-                </div>
-                <div class="gallery-item interactive-gallery" data-image="content/img/foto3.jpg">
-                    <img src="content/img/foto3.jpg" alt="Compromiso" onerror="this.style.display='none'; this.parentNode.classList.add('img-placeholder')">
-                    <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
-                </div>
-                <div class="gallery-item interactive-gallery" data-image="content/img/foto4.jpg">
-                    <img src="content/img/foto4.jpg" alt="Momentos juntos" onerror="this.style.display='none'; this.parentNode.classList.add('img-placeholder')">
-                    <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+            <div class="kids-policy-card paper-texture">
+                <div class="kids-policy-inner">
+                    <div class="kids-policy-icon">
+                        <svg viewBox="0 0 64 64" width="50" height="50" stroke="var(--primary-color)" stroke-width="1.2" fill="none">
+                            <path d="M24,36 C24,24 18,18 32,18 C46,18 40,24 40,36 C40,48 32,54 32,54 C32,54 24,48 24,36 Z" />
+                            <path d="M32,18 L32,10 M32,54 L32,58 M28,58 L36,58" />
+                            <circle cx="32" cy="28" r="2" fill="var(--primary-color)"/>
+                            <circle cx="28" cy="34" r="1.5" fill="var(--accent-medium)"/>
+                            <circle cx="36" cy="34" r="1.5" fill="var(--accent-medium)"/>
+                        </svg>
+                    </div>
+                    <h3>Nota Importante</h3>
+                    <p class="policy-text">
+                        Amamos a tus pequeños, sin embargo, con el deseo de que disfrutes de nuestra boda al máximo y puedas relajarte, hemos decidido reservar este evento exclusivamente para adultos. Agradecemos enormemente tu comprensión.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Modal Lightbox para visualización ampliada de imágenes de la galería -->
-    <div id="lightbox-modal" class="lightbox">
-        <span class="lightbox-close">&times;</span>
-        <img class="lightbox-content" id="lightbox-img" alt="Vista ampliada">
+    <!-- Divisor Floral -->
+    <div class="floral-divider reveal">
+        <img src="https://png.pngtree.com/png-vector/20240913/ourmid/pngtree-flowers-and-plants-png-image_13549751.png" alt="Arreglo Floral">
     </div>
 
-    <!-- SECCIÓN RSVP PERSONALIZADA -->
+    <!-- Galería -->
+    <section class="gallery-section reveal">
+        <div class="container">
+            <h2>Nuestra Galería</h2>
+            <div class="carousel-container">
+                <div class="carousel-track" id="carousel-track">
+                    <div class="carousel-slide active" data-index="0">
+                        <img src="content/img/foto1.jpg" alt="Daniel & Angelica" onerror="this.style.display='none'; this.parentNode.classList.add('img-placeholder')">
+                    </div>
+                    <div class="carousel-slide" data-index="1">
+                        <img src="content/img/foto2.jpg" alt="Sesión de novios" onerror="this.style.display='none'; this.parentNode.classList.add('img-placeholder')">
+                    </div>
+                    <div class="carousel-slide" data-index="2">
+                        <img src="content/img/foto3.jpg" alt="Compromiso" onerror="this.style.display='none'; this.parentNode.classList.add('img-placeholder')">
+                    </div>
+                    <div class="carousel-slide" data-index="3">
+                        <img src="content/img/foto4.jpg" alt="Momentos juntos" onerror="this.style.display='none'; this.parentNode.classList.add('img-placeholder')">
+                    </div>
+                </div>
+                <div class="carousel-dots" id="carousel-dots">
+                    <span class="dot-indicator active" data-index="0"></span>
+                    <span class="dot-indicator" data-index="1"></span>
+                    <span class="dot-indicator" data-index="2"></span>
+                    <span class="dot-indicator" data-index="3"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Confirmación RSVP -->
     <section class="rsvp-section reveal">
         <div class="container">
             <div class="rsvp-card paper-texture">
@@ -363,11 +464,13 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
         <p>&copy; 2027 André Marín Todos los derechos reservados.</p>
         <p><a href="https://github.com/andremarinmx" target="_blank" rel="noopener">Mayascript soluciones tecnológicas</a></p>
     </footer>
 
+    <!-- Script Principal -->
     <script src="scripts/script.js"></script>
 </body>
 </html>
